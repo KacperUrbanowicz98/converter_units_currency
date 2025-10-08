@@ -17,5 +17,31 @@ radio_units.pack()
 radio_currency = tk.Radiobutton(window, text="Waluty", variable=mode, value="currency")
 radio_currency.pack()
 
+list_options = ["Długość", "Waga", "Waluta"]
+options_label = tk.Label(window, text="Kategoria:", font=("Arial", 12, "bold"))
+options_label.pack(pady=10)
+options_combo = ttk.Combobox(window, values=list_options)
+options_combo.current(0)
+options_combo.pack()
+
+list_from = ["mm", "cm", "m", "inch", "feet"]
+from_label = tk.Label(window, text="Z:", font=("Arial", 12, "bold"))
+from_label.pack(pady=10)
+from_combo = ttk.Combobox(window, values=list_from)
+from_combo.current(1)
+from_combo.pack()
+
+from_entry = tk.Entry(window, width=20)
+from_entry.pack(pady=5)
+
+list_to = ["mm", "cm", "m", "inch", "feet"]
+to_label = tk.Label(window, text="Do:", font=("Arial", 12, "bold"))
+to_label.pack(pady=10)
+to_combo = ttk.Combobox(window, values=list_to)
+to_combo.current(3)
+to_combo.pack()
+
+to_entry = tk.Entry(window, state="readonly", width=20)
+to_entry.pack(pady=5)
 
 window.mainloop()
