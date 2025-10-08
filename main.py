@@ -44,4 +44,14 @@ to_combo.pack()
 to_entry = tk.Entry(window, state="readonly", width=20)
 to_entry.pack(pady=5)
 
+
+def convert():
+    number = from_entry.get()
+    units_from = from_combo.get()
+    units_to = to_combo.get()
+    print(f"Konwertuję {number} z {units_from} na {units_to}")
+
+button_convert = tk.Button(window, text="Konwertuj", command=convert)
+button_convert.pack()
+
 window.mainloop()
