@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 #Main windows
 window = tk.Tk()
@@ -44,12 +45,40 @@ to_combo.pack()
 to_entry = tk.Entry(window, state="readonly", width=20)
 to_entry.pack(pady=5)
 
+length_to_cm = {
+    "mm": 0.1,
+    "cm": 1,
+    "m": 100,
+    "inch": 2.54,
+    "feet": 30.48
+}
+
 
 def convert():
     number = from_entry.get()
-    units_from = from_combo.get()
-    units_to = to_combo.get()
-    print(f"Konwertuję {number} z {units_from} na {units_to}")
+    if not number:
+        messagebox.showwarning("Błąd", "Podaj wartość do konwersji!")
+        return
+    try:
+        number_float = float(number)
+
+        units_from = from_combo.get()
+        units_to = to_combo.get()
+
+        value_in_cm = number_float * length_to_cm[units_from]
+        result = value_in_cm / length_to_cm[units_to]
+
+        result_rounded = round(result, 2)
+
+        to_entry.config(state="normal")
+        to_entry.delete(0, tk.END)
+        to_entry.insert(0, str(result_rounded))
+        to_entry.config(state="readonly")
+
+    except ValueError:
+        messagebox.showerror("Błąd", "Wprowadź poprawną liczbę!")
+
+
 
 button_convert = tk.Button(window, text="Konwertuj", command=convert)
 button_convert.pack()
